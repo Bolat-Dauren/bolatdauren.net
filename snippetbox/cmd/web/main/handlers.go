@@ -2,8 +2,8 @@ package main
 
 import (
 	"bolatdauren.net/snippetbox/pkg/models"
-	"html/template" // New import
-	"log"           // New import
+	"html/template"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -27,7 +27,6 @@ func homePageFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем данные в шаблон
 	data := struct {
 		LatestArticles []models.Article
 	}{
@@ -41,7 +40,6 @@ func homePageFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем структуру data в функцию Execute
 	err = ts.Execute(w, data)
 	if err != nil {
 		log.Println(err.Error())
@@ -68,7 +66,6 @@ func forStudentsFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем данные в шаблон
 	data := struct {
 		LatestArticles []models.Article
 	}{
@@ -82,7 +79,6 @@ func forStudentsFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем структуру data в функцию Execute
 	err = ts.Execute(w, data)
 	if err != nil {
 		log.Println(err.Error())
@@ -109,7 +105,6 @@ func forStaffFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем данные в шаблон
 	data := struct {
 		LatestArticles []models.Article
 	}{
@@ -123,7 +118,6 @@ func forStaffFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем структуру data в функцию Execute
 	err = ts.Execute(w, data)
 	if err != nil {
 		log.Println(err.Error())
@@ -150,7 +144,6 @@ func forApplicantsFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем данные в шаблон
 	data := struct {
 		LatestArticles []models.Article
 	}{
@@ -164,7 +157,6 @@ func forApplicantsFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем структуру data в функцию Execute
 	err = ts.Execute(w, data)
 	if err != nil {
 		log.Println(err.Error())
@@ -191,7 +183,6 @@ func forResearchersFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем данные в шаблон
 	data := struct {
 		LatestArticles []models.Article
 	}{
@@ -205,7 +196,6 @@ func forResearchersFunction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Передаем структуру data в функцию Execute
 	err = ts.Execute(w, data)
 	if err != nil {
 		log.Println(err.Error())
@@ -223,7 +213,6 @@ func addArticleFunction(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case http.MethodGet:
-		// Display the add article form
 		files := []string{
 			"./ui/html/layout_addNew.tmpl",
 			"./ui/html/layout_base.tmpl",
@@ -245,15 +234,12 @@ func addArticleFunction(w http.ResponseWriter, r *http.Request) {
 		}
 
 	case http.MethodPost:
-		// Process form submission and add article to the database
 		title := r.FormValue("title")
 		content := r.FormValue("content")
 		rawAudience := r.FormValue("audience")
 
-		// Convert the audience input to lowercase
 		audience := strings.ToLower(strings.TrimSpace(rawAudience))
 
-		// Validate the audience
 		validAudiences := map[string]bool{
 			"студентам":    true,
 			"персоналу":    true,
@@ -280,12 +266,11 @@ func addArticleFunction(w http.ResponseWriter, r *http.Request) {
 		}
 
 		files := []string{
-			"./ui/html/layout_addResult.tmpl", // New template for result page
+			"./ui/html/layout_addResult.tmpl",
 			"./ui/html/layout_base.tmpl",
 			"./ui/html/powered_by.tmpl",
 		}
 
-		// Include success or error messages in the data struct
 		data := struct {
 			SuccessMessage string
 			ErrorMessage   string
