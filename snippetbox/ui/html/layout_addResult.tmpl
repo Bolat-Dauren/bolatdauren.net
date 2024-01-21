@@ -1,0 +1,11 @@
+{{template "base" .}}
+{{define "title"}}Результат добавления статьи{{end}}
+{{define "main"}}
+  {{if .SuccessMessage}}
+    <h2 style="color: green;">{{.SuccessMessage}}</h2>
+    <a href="/add_article">Добавить еще статью</a>
+  {{else}}
+    <h2 style="color: red;">{{.ErrorMessage}}</h2>
+    <a href="/add_article">Попробовать снова</a>
+  {{end}}
+{{end}}
