@@ -1,3 +1,5 @@
+// bolatdauren.net/snippetbox/ui/static/js/main.js
+
 var navLinks = document.querySelectorAll("nav a");
 for (var i = 0; i < navLinks.length; i++) {
 	var link = navLinks[i]
