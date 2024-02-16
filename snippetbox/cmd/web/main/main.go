@@ -20,11 +20,6 @@ func main() {
 	mux.HandleFunc("/researchers_path", forResearchersFunction)
 	mux.HandleFunc("/add_article", addArticleFunction)
 	mux.HandleFunc("/add_meal", addMealPageFunction)
-	mux.HandleFunc("/register", registerPageFunction)
-	mux.HandleFunc("/login", loginPageFunction)
-	mux.HandleFunc("/register_user", registerUserFunction)
-	mux.HandleFunc("/login_user", loginFunction)
-	mux.HandleFunc("/registration_success", registrationSuccessPageFunction)
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
